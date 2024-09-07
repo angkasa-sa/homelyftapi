@@ -10,7 +10,7 @@ dotenv.config();
 
 // Menghubungkan ke MongoDB
 mongoose
-  .connect(process.env.MONGO)
+  .connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB!');
   })
@@ -41,6 +41,7 @@ app.use((err, req, res, next) => {
 });
 
 // Server listening
-app.listen(3000, () => {
-  console.log('API server is running on port 3000!');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`API server is running on port ${port}!`);
 });
